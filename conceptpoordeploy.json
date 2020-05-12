@@ -1,0 +1,43 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {},
+    "functions": [],
+    "variables": {},
+    "resources": [
+        {
+            "name": "plan-concept-poor",
+            "type": "Microsoft.Web/serverfarms",
+            "apiVersion": "2018-02-01",
+            "location": "[resourceGroup().location]",
+            "sku": {
+                "name": "F1",
+                "capacity": 1
+            },
+            "tags": {
+                "displayName": "plan-concept-poor"
+            },
+            "properties": {
+                "name": "plan-concept-poor"
+            }
+        },
+        {
+            "name": "site-concept-poor",
+            "type": "Microsoft.Web/sites",
+            "apiVersion": "2018-11-01",
+            "location": "[resourceGroup().location]",
+            "tags": {
+                "[concat('hidden-related:', resourceGroup().id, '/providers/Microsoft.Web/serverfarms/plan-concept-poor')]": "Resource",
+                "displayName": "site-concept-poor"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Web/serverfarms', 'plan-concept-poor')]"
+            ],
+            "properties": {
+                "name": "site-concept-poor",
+                "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', 'plan-concept-poor')]"
+            }
+        }
+    ],
+    "outputs": {}
+}
