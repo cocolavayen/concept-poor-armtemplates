@@ -7,4 +7,4 @@ az deployment group validate -g coco-test --template-file "conceptproofdeploy.js
 az deployment group validate -g coco-test --template-file "deployments/deploy.json" --parameters "deployments/deploy.parameters.json"  --verbose 
 
 # deploy it
-az group deployment create -n deployTestCoco -g coco-test --template-file "deployment/deployAzure.json" --parameters "deployment/deployAzure.parameters.json"  --verbose 
+az group deployment create -n deployTestCoco -g coco-test --template-file "deployments/deploy.json" --parameters "deployments/deploy.parameters.json"  --verbose 

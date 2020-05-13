@@ -52,9 +52,10 @@
         }
     },
     "variables": {
-        "storageAccountName": "[concat(uniquestring(resourceGroup().id, parameters('functionAppName')))]",
-        "functionAppName": "[toLower(concat(parameters('functionAppName'), uniquestring(resourceGroup().id)))]",
-        "serverFarmName": "[toLower(concat(parameters('serverFarmName'), uniquestring(resourceGroup().id)))]",
+        "sufix" : "[substring(uniqueString(resourceGroup().id, resourceGroup().location), 0, 5)]",
+        "storageAccountName": "[toLower(concat(parameters('storageAccountName'), variables('sufix')))]",
+        "functionAppName": "[toLower(concat(parameters('functionAppName'), variables('sufix')))]",
+        "serverFarmName": "[toLower(concat(parameters('serverFarmName'),  variables('sufix')))]",
         "functionWorkerRuntime": "[parameters('runtime')]",
         "repoURL": "https://github.com/cocolavayen/concept-poor-armtemplates.git"
     },
@@ -79,23 +80,23 @@
                         },
                         {
                             "name": "AzureWebJobsStorage",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountName'),'2015-05-01-preview').key1)]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountName'),'2019-06-01').key1)]"
                         },
                         {
                             "name": "WEBSITE_CONTENTAZUREFILECONNECTIONSTRING",
-                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=', variables('storageAccountName'), ';AccountKey=', listKeys(variables('storageAccountName'),'2015-05-01-preview').key1)]"
+                            "value": "[concat('DefaultEndpointsProtocol=https;AccountName=',variables('storageAccountName'), ';AccountKey=',listKeys(resourceId('Microsoft.Storage/storageAccounts', parameters('storageAccountName')), '2019-06-01').keys[0].value,';EndpointSuffix=','core.windows.net')]"
                         },
                         {
                             "name": "WEBSITE_CONTENTSHARE",
-                            "value": "[variables('functionWorkerRuntime')]"
+                            "value": "[variables('functionAppName')]"
                         },
                         {
                             "name": "FUNCTIONS_EXTENSION_VERSION",
-                            "value": "~2"
+                            "value": "~3"
                         },
                         {
                             "name": "FUNCTIONS_WORKER_RUNTIME",
-                            "value": "[variables('functionAppName')]"
+                            "value": "[variables('functionWorkerRuntime')]"
                         }
                     ]
                 }
