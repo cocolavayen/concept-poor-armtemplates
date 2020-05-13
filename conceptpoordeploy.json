@@ -3,10 +3,12 @@
     "contentVersion": "1.0.0.0",
     "parameters": {},
     "functions": [],
-    "variables": {},
+    "variables": {
+        "storageAccountName": "[concat('st', uniquestring(resourceGroup().id))]"
+    },
     "resources": [
         {
-            "name": "storageconceptpoor",
+            "name": "[variables('storageAccountName')]",
             "type": "Microsoft.Storage/storageAccounts",
             "apiVersion": "2019-06-01",
             "tags": {
