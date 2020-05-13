@@ -2,24 +2,22 @@
     "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "appName": {
+        "serverFarmName": {
             "type": "string",
             "metadata": {
-                "description": "The name of the function app that you wish to create."
+                "description": "The name of the PlanAppSerive"
             }
         },
-        "basename": {
+        "storageAccountName": {
             "type": "string",
-            "defaultValue": "swgreetbot",
             "metadata": {
-                "description": ""
+                "description": "The name of the Storage Account"
             }
         },
-        "suffix": {
+        "functionAppName": {
             "type": "string",
-            "defaultValue": "test",
             "metadata": {
-                "description": ""
+                "description": "The name of the function app"
             }
         },
         "storageSKU": {
@@ -54,9 +52,9 @@
         }
     },
     "variables": {
-        "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'azfunctions')]",
-        "functionAppName": "[toLower(concat(parameters('baseName'), parameters('suffix')))]",
-        "serverFarmName": "[parameters('appName')]",
+        "storageAccountName": "[concat(uniquestring(resourceGroup().id, parameters('functionAppName')))]",
+        "functionAppName": "[toLower(concat(parameters('functionAppName'), uniquestring(resourceGroup().id)))]",
+        "serverFarmName": "[toLower(concat(parameters('serverFarmName'), uniquestring(resourceGroup().id)))]",
         "functionWorkerRuntime": "[parameters('runtime')]",
         "repoURL": "https://github.com/cocolavayen/concept-poor-armtemplates.git"
     },

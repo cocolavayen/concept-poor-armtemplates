@@ -2,23 +2,17 @@
     "$": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "appName": {
-            "value": "greetbot"
+        "functionAppName": {
+            "value": "appswgreetbot"
         },
-        "basename": {
-            "value": "sw"
+        "serverFarmName": {
+            "value": "planswgreetbot"
         },
-        "suffix": {
-            "value": "dev"
-        },
-        "storagePrefix": {
-            "value": "st"
+        "storageAccountName": {
+            "value": "stswgreetbot"
         },
         "storageSKU": {
             "value": "Standard_LRS"
-        },
-        "appServicePlanName": {
-            "value": "plan"
         },
         "GitHubBranch": {
             "value": "ARM_templates_initial"
