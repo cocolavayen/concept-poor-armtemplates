@@ -1,10 +1,10 @@
-az group create -n cloud5minsAz -l eastus
+az group create -n cloud5minsAz -l brazil-south
 
 # validate command
-az deployment group validate -g coco-test --template-file "conceptproofdeploy.json" --verbose 
+az group deployment validate -g franco-dev --template-file "deployments/deploy.json" --verbose 
 
 # validate with Parameter file
-az deployment group validate -g coco-test --template-file "deployments/deploy.json" --parameters "deployments/deploy.parameters.json"  --verbose 
+az group deployment validate -g franco-dev --template-file "deployments/deploy.json" --parameters "deployments/deploy.parameters.json"  --verbose 
 
 # deploy it
-az group deployment create -n deployTestCoco -g coco-test --template-file "deployments/deploy.json" --parameters "deployments/deploy.parameters.json"  --verbose 
+az deployment group create -n deployTestCoco -g franco-dev --template-file "deployments/deploy.json" --parameters "deployments/deploy.parameters.json"  --verbose 

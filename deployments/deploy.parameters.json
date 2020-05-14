@@ -15,7 +15,7 @@
             "value": "Standard_LRS"
         },
         "GitHubBranch": {
-            "value": "ARM_templates_initial"
+            "value": "master"
         }
     }
 }
